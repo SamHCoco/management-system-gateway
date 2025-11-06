@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: management-system-gateway
+  output:
+    ansi:
+      enabled: ALWAYS
+  cloud:
+    gateway:
+      routes:
+        - id: employee-service
+          uri: lb://EMPLOYEE-SERVICE
+          predicates:
+            - Path=/employee-service/**
+          filters:
+            - RewritePath=/employee-service/(?<segment>.*), /$\{segment}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+server:
+  port: 8765
