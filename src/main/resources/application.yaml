@@ -13,6 +13,20 @@ spring:
             - Path=/employee-service/**
           filters:
             - RewritePath=/employee-service/(?<segment>.*), /$\{segment}
+    globalcors:
+      cors-configurations:
+        '[/**]':
+          allowed-origins:
+            - "http://localhost:5173"
+          allowed-methods:
+            - "GET"
+            - "PUT"
+            - "POST"
+            - "DELETE"
+            - "OPTIONS"
+          allowed-headers:
+            - "*"
+          allow-credentials: true
 
 eureka:
   client:
